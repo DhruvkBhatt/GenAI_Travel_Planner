@@ -5,3 +5,6 @@ llm:
   groq:
     provider: "groq"
     model_name: "deepseek-r1-distill-llama-70b"
+  gemini:
+    provider: "google_genai"
+    model_name: "gemini-flash-lite-latest"

@@ -5,7 +5,10 @@ from pydantic import BaseModel, Field
 from utils.config_loader import load_config
 from langchain_groq import ChatGroq
 from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 
+# Load environment variables
+load_dotenv()
 
 class ConfigLoader:
     def __init__(self):
@@ -16,10 +19,10 @@ class ConfigLoader:
         return self.config[key]
 
 class ModelLoader(BaseModel):
-    model_provider: Literal["groq", "openai"] = "groq"
+    model_provider: Literal["groq", "openai", "gemini"] = "gemini"
     config: Optional[ConfigLoader] = Field(default=None, exclude=True)
 
-    def model_post_init(self, __context: Any) -> None:
+    def model_post_init(self, _ModelLoader__context: Any) -> None:
         self.config = ConfigLoader()
     
     class Config:
@@ -41,6 +44,10 @@ class ModelLoader(BaseModel):
             openai_api_key = os.getenv("OPENAI_API_KEY")
             model_name = self.config["llm"]["openai"]["model_name"]
             llm = ChatOpenAI(model_name="o4-mini", api_key=openai_api_key)
+        elif self.model_provider == "gemini":
+            print("Loading LLM from Gemini..............")
+            google_api_key = os.getenv("GOOGLE_API_KEY")
+            model_name = self.config["llm"]["gemini"]["model_name"]
+            llm = ChatGoogleGenerativeAI(model=model_name, google_api_key=google_api_key)
         
         return llm
-    

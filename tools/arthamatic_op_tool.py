@@ -38,4 +38,11 @@ def currency_converter(from_curr: str, to_curr: str, value: float)->float:
     alpha_vantage = AlphaVantageAPIWrapper()
     response = alpha_vantage._get_exchange_rate(from_curr, to_curr)
     exchange_rate = response['Realtime Currency Exchange Rate']['5. Exchange Rate']
-    return value * float(exchange_rate)
+    print(f"Exchange Rate from {from_curr} to {to_curr}: {exchange_rate}")
+    try:
+        amount = float(value)
+    except (ValueError, TypeError):
+        raise ValueError(
+            f"currency_converter: 'value' must be a number or numeric string, got {type(value).__name__}"
+        )
+    return amount * float(exchange_rate)

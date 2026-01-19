@@ -25,7 +25,7 @@ class QueryRequest(BaseModel):
 async def query_travel_agent(query:QueryRequest):
     try:
         print(query)
-        graph = GraphBuilder(model_provider="groq")
+        graph = GraphBuilder(model_provider="gemini")
         react_app=graph()
         #react_app = graph.build_graph()
 
@@ -36,7 +36,9 @@ async def query_travel_agent(query:QueryRequest):
         print(f"Graph saved as 'my_graph.png' in {os.getcwd()}")
         # Assuming request is a pydantic object like: {"question": "your text"}
         messages={"messages": [query.question]}
+        print(f"Messages: {messages}")
         output = react_app.invoke(messages)
+        print(f"Output: {output}")
 
         # If result is dict with messages:
         if isinstance(output, dict) and "messages" in output:
@@ -47,3 +49,11 @@ async def query_travel_agent(query:QueryRequest):
         return {"answer": final_output}
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
+
+@app.get("/")
+async def root():
+    return {"message": "Travel Planner Agentic Application is running."}
+
+@app.get("/health")
+async def health():
+    return {"status": "healthy"}
