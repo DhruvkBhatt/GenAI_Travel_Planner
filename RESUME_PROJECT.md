@@ -6,7 +6,7 @@
 
 Built and deployed an AI-powered agentic travel planning system using LangGraph workflows that generates comprehensive, personalized travel itineraries with real-time data integration, reducing manual planning time from hours to minutes.
 
-Architected a multi-agent LangGraph system with 4+ specialized tools (weather info, place search, expense calculator, currency converter) orchestrated through state machine workflows; integrated multiple LLM providers (Google Gemini, OpenAI GPT, Groq) with fallback mechanisms for 99%+ uptime.
+Architected a multi-agent LangGraph system with 4+ specialized tools (weather info, place search, expense calculator, currency converter) orchestrated through state machine workflows; integrated multiple LLM providers (Google Gemini, OpenAI GPT, Groq) with seamless provider switching for high availability.
 
 Implemented real-time data retrieval pipeline connecting 5+ external APIs (OpenWeatherMap, Google Places, Exchange Rate API) to deliver live weather forecasts, location details, and pricing information, enabling dynamic itinerary adjustments based on current conditions.
 
@@ -25,4 +25,4 @@ Architected multi-agent workflow with 4 specialized tools (weather, places, calc
 
 Implemented FastAPI backend + Streamlit frontend with CORS-enabled REST API, deployed on Render with auto-scaling, supporting concurrent sessions and delivering day-by-day itineraries, hotel/restaurant recommendations, activities, and expense breakdowns with real-time pricing.
 
-Enhanced user experience by 95% through automated data retrieval and intelligent trip planning, eliminating manual research across multiple websites and consolidating weather, locations, costs, and logistics into a single conversational interface.
+Significantly enhanced user experience through automated data retrieval and intelligent trip planning, eliminating manual research across multiple websites and consolidating weather, locations, costs, and logistics into a single conversational interface.
